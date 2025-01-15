@@ -72,7 +72,34 @@ var match="";
 console.log(lastEruption("Italy"))
 
 
+function searchElevationAbove(feet){
+    var tallVolcanoes = [];
+    feet = Math.round(feet)
+    for(var i = 0; i<volcanoNames.length; i++){
+     if(elevations[i]>feet){
+        tallVolcanoes.push(volcanoNames[i])
+     }
+    }
+        
+return tallVolcanoes
+}
+console.log(searchElevationAbove(-2000))
 
+function findLocationClosest(longitude, latitude){
 
-
-
+    var shortestDistance = 1000000000000000;
+    var closestVolcano = "";
+    for(var i = 0; i<volcanoNames.length; i++){
+        var rise = (longitudes[i] - longitude)
+        var run = (latitudes[i] - latitude)
+        var hypotenuese = (rise * rise) + (run * run)
+        var distance = Math.sqrt(hypotenuese)
+        if(distance < shortestDistance){
+            shortestDistance = distance;
+            closestVolcano = volcanoNames[i]
+        }
+    
+    }
+    return closestVolcano;
+}
+console.log(findLocationClosest(6, 50))
