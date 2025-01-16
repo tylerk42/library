@@ -38,14 +38,14 @@ sum=0;
     }
     return sum
 }
-console.log(numberInRegion("Italy"))
+console.log(numberInRegion("peru"))
 // This function takes a desired rock type and returns all Volcanoes made of that rock type
 // rocktype (string) - Takes the user's desired rock type
 // matchingOutputs (list) - Returns the all volcanoes made of that rock type 
 function findVolcanoes(rocktype){
 var matchingOutputs=[];
     for(var i=0; i<volcanoNames.length;i++){
-        if(dominantRockTypes[i].toLowerCase().includes(rocktype)){
+        if(dominantRockTypes[i].toLowerCase().includes(rocktype.toLowerCase())){
             matchingOutputs.push(volcanoNames[i])
         }
     }
@@ -54,7 +54,7 @@ var matchingOutputs=[];
     }
     return matchingOutputs
 }
-console.log(findVolcanoes("foidite"))
+console.log(findVolcanoes("10000"))
 // This Function takes a country from the user and finds the volcanoe with the most recent eruption
 // country (string) - takes the desired country of the user
 // match (single answer) - returns the volcanoe with the most recent erupption in that country
@@ -62,10 +62,11 @@ function lastEruption(country){
 var max=-100000000;
 var match="";
     for(var i=0; i<volcanoNames.length; i++){
-        if(countries[i]==country){
+        if(countries[i].toLowerCase()==country.toLowerCase()){
+            
             if(max<newLastKnownEruptions[i]){
-            max=newLastKnownEruptions[i]
-            match=volcanoNames[i]
+                max=newLastKnownEruptions[i]
+                match=volcanoNames[i]
             }
         }
     }
@@ -75,7 +76,7 @@ var match="";
     return match
 }
 
-console.log(lastEruption("Italy"))
+console.log(lastEruption("CaPe VeRdE"))
 
 // This function finds all the volcanoes above the user's desired elevation
 // feet (number) - takes the desired elevation of the user
@@ -88,12 +89,15 @@ function searchElevationAbove(feet){
         tallVolcanoes.push(volcanoNames[i])
      }
     }
-        
+if(feet>6789){
+    return -1
+}
 return tallVolcanoes
 }
-console.log(searchElevationAbove(-2000))
+console.log(searchElevationAbove(0))
 // This function finds the volcanoe closest to user's desired location
-// Longitude/latitude (number) - takes user's desire coordinates
+// Longitude (number) - takes user's desire longitude
+// latitude (number) - takes user's desire latidue
 // closestVolcanoe (single answer) - returns volcanoe closest to user's coordinates
 function findLocationClosest(longitude, latitude){
 
@@ -110,6 +114,9 @@ function findLocationClosest(longitude, latitude){
         }
     
     }
+    if((latitude>180) || (latitude<-180) ||(longitude>180) || (longitude<-180)){
+        return "those coordinates not exsist"
+    }
     return closestVolcano;
 }
-console.log(findLocationClosest(6, 50))
+console.log(findLocationClosest(-20, -20))
